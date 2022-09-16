@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outFile": "../../dist/tests/saga-core.js",
+  },
+  "references": [
+    { "path": "../../src/saga-core", "prepend": true }
+  ],
+  "include": ["setup.ts", "*.spec.ts"],
+}

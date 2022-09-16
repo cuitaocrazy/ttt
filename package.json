@@ -1,0 +1,24 @@
+{
+  "name": "transaction-coordinator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsc -b ./tests/saga-core && mocha ./dist/tests/saga-core.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.3",
+    "@types/grunt": "^0.4.27",
+    "@types/mocha": "^9.1.1",
+    "@types/sinon": "^10.0.13",
+    "chai": "^4.3.6",
+    "grunt": "^1.5.3",
+    "mocha": "^10.0.0",
+    "prettier": "^2.7.1",
+    "sinon": "^14.0.0",
+    "typescript": "^4.8.3"
+  }
+}
