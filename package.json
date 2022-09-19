@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc -b ./tests/saga-core && mocha ./dist/tests/saga-core.js"
+    "test": "npx grunt test "
   },
   "keywords": [],
   "author": "",
@@ -18,7 +18,11 @@
     "grunt": "^1.5.3",
     "mocha": "^10.0.0",
     "prettier": "^2.7.1",
+    "redis-memory-server": "^0.6.0",
     "sinon": "^14.0.0",
     "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "ioredis": "^5.2.3"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outFile": "../../dist/libs/saga-redis-scheduler.js",
+  },
+  "references": [
+    { "path": "../saga-core" },
+    { "path": "../saga-redis-common" }
+  ]
+}

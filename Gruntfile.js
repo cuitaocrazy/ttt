@@ -5,32 +5,52 @@ const exec = require('child_process').exec
  * @param {IGrunt} grunt
  */
 module.exports = function (grunt) {
+  const tests = ['saga-core', 'saga-redis-repo', 'saga-redis-scheduler']
+
+  function tscBuild(dir) {
+    return new Promise((resolve, reject) => {
+      exec(`tsc -b -v ${dir}`, (err, stdout, stderr) => {
+        if (err) {
+          reject(err + stderr)
+        } else {
+          resolve(stdout)
+        }
+      })
+    })
+  }
+
+  function runTest(jss) {
+    return new Promise((resolve, reject) => {
+      exec(`npx mocha ${jss.join(' ')}`, (err, stdout, stderr) => {
+        if (err) {
+          reject(err + stderr)
+        } else {
+          resolve(stdout)
+        }
+      })
+    })
+  }
 
   grunt.registerTask('buildTest', function () {
     // grunt.log.write('Logging some stuff...').ok()
     const done = this.async()
 
-    exec('tsc -b ./tests/saga-core', (err, stdout, stderr) => {
-      if (err) {
-        grunt.log.errorlns(stderr)
-      } else {
-        grunt.log.writeln(stdout)
-      }
-      done()
-    })
+    Promise.all(tests.map((name) => `./tests/${name}`).map(tscBuild))
+      .then((stdout) => grunt.log.writeln(stdout))
+      .then(() => done(true))
+      .catch((stderr) => grunt.log.errorlns(stderr))
+      .then(() => done(false))
   })
 
   grunt.registerTask('runTest', function () {
     const done = this.async()
 
-    exec('npx mocha ./dist/tests/saga-core.js', (err, stdout, stderr) => {
-      if (err) {
-        grunt.log.errorlns(stderr)
-      } else {
-        grunt.log.writeln(stdout)
-      }
-      done()
-    })
+    // Promise.all(tests.map((name) => `./dist/tests/${name}.js`).map(runTest))
+    runTest(tests.map((name) => `./dist/tests/${name}.js`))
+      .then((stdout) => grunt.log.writeln(stdout))
+      .then(() => done(true))
+      .catch((stderr) => grunt.log.errorlns(stderr))
+      .then(() => done(false))
   })
 
   grunt.registerTask('test', ['buildTest', 'runTest'])

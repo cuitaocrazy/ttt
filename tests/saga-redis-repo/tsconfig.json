@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outFile": "../../dist/tests/saga-redis-repo.js",
+  },
+  "references": [
+    { "path": "../../src/saga-core", "prepend": true },
+    { "path": "../../src/saga-redis-common", "prepend": true },
+    { "path": "../../src/saga-redis-repo", "prepend": true }
+  ],
+  // "include": ["setup.ts", "*.spec.ts"],
+}
