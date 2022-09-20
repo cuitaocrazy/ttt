@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 
   function runTest(jss) {
     return new Promise((resolve, reject) => {
-      exec(`npx mocha ${jss.join(' ')}`, (err, stdout, stderr) => {
+      exec(`npx mocha ${jss.join(' ')} --colors`, (err, stdout, stderr) => {
         if (err) {
           reject(err + stderr)
         } else {
